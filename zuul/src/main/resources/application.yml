@@ -1,0 +1,23 @@
+server:
+  port: 9010
+
+spring:
+  application:
+    name: spring-cloud-zuul
+
+zuul:
+  routes:
+    product:
+      path: /pro/**
+      #url: http://localhost:8080 #直接指向product服务(http://前缀必须加)
+      serviceId: server-producer  #服务提供方的application.name
+  retryable: true #开启熔断重试功能(默认重试一次)
+
+ribbon:
+  MaxAutoRetries: 2 #单个实例重试次数
+  MaxAutoRetriesNextServer: 1 #当前实例重试失败后切换实例的个数(每切换一个,仍是请求一次,重试两次)
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eurekaPeer1:8000/eureka/

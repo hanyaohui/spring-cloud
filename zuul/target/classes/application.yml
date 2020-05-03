@@ -1,0 +1,23 @@
+server:
+  port: 9010
+
+spring:
+  application:
+    name: spring-cloud-zuul
+
+zuul:
+  routes:
+    product:
+      path: /pro/**
+      #url: http://localhost:8080 #ֱ��ָ��product����(http://ǰ׺�����)
+      serviceId: server-producer  #�����ṩ����application.name
+  retryable: true #�����۶����Թ���(Ĭ������һ��)
+
+ribbon:
+  MaxAutoRetries: 2 #����ʵ�����Դ���
+  MaxAutoRetriesNextServer: 1 #��ǰʵ������ʧ�ܺ��л�ʵ���ĸ���(ÿ�л�һ��,��������һ��,��������)
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eurekaPeer1:8000/eureka/

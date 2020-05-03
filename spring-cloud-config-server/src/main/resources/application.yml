@@ -1,0 +1,31 @@
+server:
+  port: 9005
+
+spring:
+  application:
+    name: spring-cloud-config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/hanyaohui/hello
+          search-paths: config-package
+          #username: github账号(public可不设)
+          #password: github密码
+  rabbitmq:
+    host: 192.168.60.128
+    port: 5672
+    username: root
+    password: root
+
+#注册到eureka
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8000/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh
